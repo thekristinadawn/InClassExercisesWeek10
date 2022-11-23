@@ -95,27 +95,17 @@ namespace InClassExercisesWeek10
                 foreach (var innerPair in pair.Value)
                 {
                     Console.WriteLine("{0}:{1},{2}", pair.Key, innerPair.Key, innerPair.Value);
+                    
                 }
             }
 
-            //prints keys
-            //foreach (var item in produce)
-            //{
-            //string key = item.Key;
-            // Dictionary<string, double> innerDict = item.Value;
-            //Console.WriteLine(key,innerDict + key,item.Value);
+            //Calculate total, it should be 39 not 36...
+            var result = produce.SelectMany(x => x.Value)
+                   .GroupBy(x => x.Key, y => y.Value, (Key, Value) => new { Value })
+                .Sum(x => x.Value.Aggregate((a, b) => a * b));
 
-            //}
+            Console.WriteLine(result);
 
-            //calculate total if all items sold
-
-            foreach (var pair in produce)
-            {
-                foreach (var innerPair in pair.Value)
-                {
-                    Console.WriteLine("{0}:{1},{2}", pair.Key, innerPair.Key, innerPair.Value);
-                }
-            }
 
         }
     }
